@@ -1,0 +1,34 @@
+<div class="list-article-container" ng-controller="ListArticleController as vm">
+	<div ng-include="'/components/menu/menu.html'"></div>
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Tiều đề</th>
+					<th>Ảnh</th>
+					<th>Ngày tháng</th>
+					<th>Xử lý</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="article in vm.articles">
+					<td>{{$index + 1}}</td>
+					<td>{{article.title}}</td>
+					<td><img width="100px" src="{{vm.getImageNotCache(article.img)}}"></td>
+					<td>{{vm.getDate(article.time)}}</td>
+					<td>
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary" ui-sref="detail-article({id: article.id})">
+								Chi tiết
+							</button>
+							<button type="button" class="btn btn-danger" ng-click="vm.remove(article.id)">
+								Xóa
+							</button>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

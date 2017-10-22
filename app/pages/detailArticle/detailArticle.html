@@ -1,0 +1,26 @@
+<div class="update-article-container" ng-controller="DetailArticleController as vm">
+	<div ng-include="'/components/menu/menu.html'"></div>
+	<div class="col-md-8 col-md-offset-2">
+	<form  role="form" ng-submit="vm.update()">
+		<legend>Sửa bài đăng</legend>
+		
+		<div class="form-group">
+			<label for="file">Ảnh</label>
+			<input type="file" ng-model="vm.article.file" class="form-control" id="file" name="file" accept="image/*"onchange="angular.element(this).scope().readURL(this)">
+			<img ng-src="{{vm.article.img}}" class="image" />
+		</div>
+
+		<div class="form-group">
+			<label for="title">Tiêu đề</label>
+			<input type="text" ng-model="vm.article.title" class="form-control" id="title" name="title" placeholder="Tiêu đề">
+		</div>
+
+		<div class="form-group">
+			<label for="content">Nội dung</label>
+			<textarea class="form-control" ng-model="vm.article.content" id="content" name="content" placeholder="Nội dung" rows="10"></textarea>
+		</div>
+	
+		<button type="submit" class="btn btn-primary">Sửa</button>
+	</form>
+	</div>
+</div>

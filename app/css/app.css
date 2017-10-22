@@ -1,0 +1,46 @@
+.login-container {
+	margin-top: 40px;
+}
+
+#image {
+	margin-top: 20px;
+}
+
+.loading-container {
+	display: none;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	left: 0;
+	top: 0;
+	background: rgba(0, 0, 0, 0.5);
+	background: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+}
+
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin: auto;
+    animation: spin 2s linear infinite;
+    margin-top: calc(50vh - 30px)
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.update-item-container .image, .update-article-container .image {
+    display: block;
+    width: 300px;
+}
+
+.error-validate {
+    color: red;
+    font-size: 13px;
+    margin-top: 4px;
+}

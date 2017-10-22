@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/app.css">
+</head>
+<body ng-app="ABBAdmin">
+	<div class="loading-container">
+		<div class="loader"></div>
+	</div>
+	<ui-view name="main"></ui-view>
+</body>
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+<script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script type="text/javascript" src="bower_components/firebase/firebase.js"></script>
+<script type="text/javascript" src="bower_components/angular-ui-router/release/stateEvents.min.js"></script>
+
+<script type="text/javascript" src="js/router.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+<!-- controller script -->
+<script type="text/javascript" src="pages/login/login.js"></script>
+<script type="text/javascript" src="pages/addArticle/addArticle.js"></script>
+<script type="text/javascript" src="pages/listArticle/listArticle.js"></script>
+<script type="text/javascript" src="pages/detailArticle/detailArticle.js"></script>
+<script type="text/javascript" src="pages/addItem/addItem.js"></script>
+<script type="text/javascript" src="pages/listItem/listItem.js"></script>
+<script type="text/javascript" src="pages/detailItem/detailItem.js"></script>
+<script type="text/javascript" src="components/menu/menu.js"></script>
+
+<!-- services script -->
+<script type="text/javascript" src="services/dataService.js"></script>
+<script type="text/javascript" src="services/utilService.js"></script>
+<script type="text/javascript" src="services/localStorageService.js"></script>
+
+<!-- directive script -->
+<script type="text/javascript" src="directives/inputChange.js"></script>
+
+</html>
