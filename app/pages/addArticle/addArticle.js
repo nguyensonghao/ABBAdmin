@@ -1,5 +1,5 @@
-app.controller('AddArticleController', ['$scope', 'UtilService', 'DataService', '$state',
-function ($scope, UtilService, DataService, $state) {
+app.controller('AddArticleController', ['$scope', 'UtilService', 'DataService', '$state', '$timeout',
+function ($scope, UtilService, DataService, $state, $timeout) {
 	var vm = this;
 	vm.article = {};
 
@@ -16,7 +16,7 @@ function ($scope, UtilService, DataService, $state) {
 				imageName: fileName
 			}).then(function (result) {
 				UtilService.hideLoading();
-				setTimeout(function () {
+				$timeout(function () {
 					if (confirm('Tạo thành công. Bạn có muốn tạo tiếp không?')) {
 						$('#file').val('');
 						$('#image').attr('src', '').width(300);

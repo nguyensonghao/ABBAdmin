@@ -1,34 +1,58 @@
-<div class="list-item-container" ng-controller="ListItemController as vm">
-	<div ng-include="'/components/menu/menu.html'"></div>
-	<div class="table-responsive">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Tiều đề</th>
-					<th>Ảnh</th>
-					<th>Bình chọn</th>
-					<th>Xử lý</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="item in vm.items | orderBy : '-num'">
-					<td>{{$index + 1}}</td>
-					<td>{{item.title}}</td>
-					<td><img width="100px" src="{{vm.getImageNotCache(item.img)}}"></td>
-					<td>{{item.num}} bình chọn</td>
-					<td>
-						<div class="btn-group">
-							<button type="button" class="btn btn-primary" ui-sref="detail-item({id: item.id})">
-								Chi tiết
-							</button>
-							<button type="button" class="btn btn-danger" ng-click="vm.remove(item.id)">
-								Xóa
-							</button>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+<div class="container body" ng-controller="ListItemController as vm">
+	<div class="main_container">
+		<div ng-include="'/components/menu/menu.html'"></div>
+		<div class="right_col" role="main" style="min-height: 1161px;">
+          	<div class="">
+	            <div class="page-title">
+	              	<div class="title_left">
+	                <h3>Danh sách tiết mục</h3>
+	              	</div>
+	            </div>
+
+	            <div class="col-md-12 col-sm-12 col-xs-12">
+	                <div class="x_panel">
+	                  	<div class="x_title">
+	                    	<h2>Bảng</h2>
+	                    	<div class="clearfix"></div>
+	                  	</div>
+
+	                  	<div class="x_content">
+	                    	<div class="table-responsive">
+	                      		<table class="table table-striped jambo_table bulk_action">
+	                        		<thead>
+	                          			<tr class="headings">
+	                            			<th class="column-title center">#</th>
+	                            			<th class="column-title">Tiêu đề</th>
+	                            			<th class="column-title center">Ảnh </th>
+	                            			<th class="column-title center">Bình chọn</th>
+	                            			<th class="column-title center">Xử lý</th>
+	                          			</tr>
+	                        		</thead>
+
+	                        	<tbody>
+		                          	<tr ng-repeat="item in vm.items | orderBy : '-num'">
+										<td class="center">{{$index + 1}}</td>
+										<td>{{item.title}}</td>
+										<td class="center"><img height="60px" src="{{vm.getImageNotCache(item.img)}}"></td>
+										<td class="center">{{item.num}} bình chọn</td>
+										<td class="center">
+											<div class="btn-group">
+												<button type="button" class="btn btn-primary" ui-sref="detail-item({id: item.id})">
+													Chi tiết
+												</button>
+												<button type="button" class="btn btn-danger" ng-click="vm.remove(item.id)">
+													Xóa
+												</button>
+											</div>
+										</td>
+									</tr>
+	                        	</tbody>
+	                      	</table>
+	                    </div>
+	                  </div>
+	                </div>
+	            </div>
+            </div>
+        </div>
 	</div>
 </div>

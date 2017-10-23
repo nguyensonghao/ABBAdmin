@@ -1,34 +1,58 @@
-<div class="list-article-container" ng-controller="ListArticleController as vm">
-	<div ng-include="'/components/menu/menu.html'"></div>
-	<div class="table-responsive">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Tiều đề</th>
-					<th>Ảnh</th>
-					<th>Ngày tháng</th>
-					<th>Xử lý</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="article in vm.articles">
-					<td>{{$index + 1}}</td>
-					<td>{{article.title}}</td>
-					<td><img width="100px" src="{{vm.getImageNotCache(article.img)}}"></td>
-					<td>{{vm.getDate(article.time)}}</td>
-					<td>
-						<div class="btn-group">
-							<button type="button" class="btn btn-primary" ui-sref="detail-article({id: article.id})">
-								Chi tiết
-							</button>
-							<button type="button" class="btn btn-danger" ng-click="vm.remove(article.id)">
-								Xóa
-							</button>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+<div class="container body" ng-controller="ListArticleController as vm">
+	<div class="main_container">
+		<div ng-include="'/components/menu/menu.html'"></div>
+		<div class="right_col" role="main" style="min-height: 1161px;">
+          	<div class="">
+	            <div class="page-title">
+	              	<div class="title_left">
+	                <h3>Danh sách bài đăng</h3>
+	              	</div>
+	            </div>
+
+	            <div class="col-md-12 col-sm-12 col-xs-12">
+	                <div class="x_panel">
+	                  	<div class="x_title">
+	                    	<h2>Bảng</h2>
+	                    	<div class="clearfix"></div>
+	                  	</div>
+
+	                  	<div class="x_content">
+	                    	<div class="table-responsive">
+	                      		<table class="table table-striped jambo_table bulk_action">
+	                        		<thead>
+	                          			<tr class="headings">
+	                            			<th class="column-title center">#</th>
+	                            			<th class="column-title">Tiêu đề</th>
+	                            			<th class="column-title center">Ảnh </th>
+	                            			<th class="column-title center">Ngày tháng</th>
+	                            			<th class="column-title center">Xử lý</th>
+	                          			</tr>
+	                        		</thead>
+
+	                        	<tbody>
+		                          	<tr ng-repeat="article in vm.articles">
+										<td class="center">{{$index + 1}}</td>
+										<td>{{article.title}}</td>
+										<td class="center"><img height="60px" src="{{vm.getImageNotCache(article.img)}}"></td>
+										<td class="center">{{vm.getDate(article.time)}}</td>
+										<td class="center">
+											<div class="btn-group">
+												<button type="button" class="btn btn-primary btn-sm" ui-sref="detail-article({id: article.id})">
+													Chi tiết
+												</button>
+												<button type="button" class="btn btn-danger btn-sm" ng-click="vm.remove(article.id)">
+													Xóa
+												</button>
+											</div>
+										</td>
+									</tr>
+	                        	</tbody>
+	                      	</table>
+	                    </div>
+	                  </div>
+	                </div>
+	            </div>
+            </div>
+        </div>
 	</div>
 </div>

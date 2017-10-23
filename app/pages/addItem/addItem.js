@@ -1,5 +1,5 @@
-app.controller('AddItemController', ['$scope', 'DataService', 'UtilService', '$state',
-function ($scope, DataService, UtilService, $state) {
+app.controller('AddItemController', ['$scope', 'DataService', 'UtilService', '$state', '$timeout',
+function ($scope, DataService, UtilService, $state, $timeout) {
 	var vm = this;
 	vm.item = {};
 
@@ -17,7 +17,7 @@ function ($scope, DataService, UtilService, $state) {
 				num: 0
 			}).then(function (result) {
 				UtilService.hideLoading();
-				setTimeout(function () {
+				$timeout(function () {
 					if (confirm('Tạo thành công. Bạn có muốn tạo tiếp không?')) {
 						$('#file').val('');
 						$('#image').attr('src', '').width(300);

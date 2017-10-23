@@ -43,4 +43,23 @@
     color: red;
     font-size: 13px;
     margin-top: 4px;
+    text-align: left;
+    margin-top: -10px;
+}
+
+.center {
+    text-align: center;
+}
+
+.right_col {
+    overflow: auto;
+}
+
+.nav_menu {
+    margin-bottom: 0 !important;
+}
+
+.login {
+    width: 100vw;
+    height: 100vh;
 }
