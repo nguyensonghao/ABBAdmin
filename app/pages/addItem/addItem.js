@@ -4,33 +4,35 @@ function ($scope, DataService, UtilService, $state) {
 	vm.item = {};
 
 	vm.add = function () {
-		UtilService.showLoading();
 		var storageRef = firebase.storage().ref();
 		var fileName = "item/" + new Date().getTime() + ".png";
-		storageRef.child(fileName).putString(vm.item.imageBlob, 'data_url').then(function (snapshot) {
-			DataService.insert('items', {
-				title: vm.item.title,
-				content: vm.item.content,
-				img: snapshot.downloadURL,
-				video: vm.item.video,
-				imageName: fileName,
-				num: 0
-			}).then(function (result) {
+		if(vm.validate()){
+			UtilService.showLoading();
+			storageRef.child(fileName).putString(vm.item.imageBlob, 'data_url').then(function (snapshot) {
+				DataService.insert('items', {
+					title: vm.item.title,
+					content: vm.item.content,
+					img: snapshot.downloadURL,
+					video: vm.item.video,
+					imageName: fileName,
+					num: 0
+				}).then(function (result) {
+					UtilService.hideLoading();
+					setTimeout(function () {
+						if (confirm('Tạo thành công. Bạn có muốn tạo tiếp không?')) {
+							$('#file').val('');
+							$('#image').attr('src', '').width(300);
+							vm.article = {};
+						} else {
+							$state.go('list-item');
+						}
+					}, 500);
+				})
+			}).catch(function (e) {
 				UtilService.hideLoading();
-				setTimeout(function () {
-					if (confirm('Tạo thành công. Bạn có muốn tạo tiếp không?')) {
-						$('#file').val('');
-						$('#image').attr('src', '').width(300);
-						vm.article = {};
-					} else {
-						$state.go('list-item');
-					}
-				}, 500);
-			})
-		}).catch(function (e) {
-			UtilService.hideLoading();
-			console.log(e);
-		}); 
+				console.log(e);
+			}); 
+		}
 	}
 
 	$scope.readURL = function (input) {
@@ -42,5 +44,52 @@ function ($scope, DataService, UtilService, $state) {
 		     	vm.item.imageBlob = reader.result;
 		   	};
         }
-    }
+	}
+	
+	vm.validate = function(){
+		if(!vm.item.imageBlob){
+			alert("Hãy chọn ảnh để thêm mới tiết mục");
+			return false;
+		}
+		else if(!vm.item.title){
+			alert("Hãy thêm tiêu đề để thêm mới tiết mục");
+			return false;
+		}
+		else if(!vm.item.video){
+			alert("Hãy thêm link video để thêm mới tiết mục");
+			return false;
+		}
+		else if(!validateYouTubeUrl(vm.item.video)){
+			alert("Link video không đúng. Hãy nhập link video youtube để thêm mới tiết mục");
+			return false;
+		}
+		else if(!vm.item.content){
+			alert("Hãy thêm nội dung để thêm mới tiết mục");
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	function validateYouTubeUrl( linkVideo)
+	{
+		var url = linkVideo;
+			if (url != undefined || url != '') {
+				var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+				var match = url.match(regExp);
+				if (match && match[2].length == 11) {
+					// Do anything for being valid
+					// if need to change the url to embed url then use below line
+					$('#ytplayerSide').attr('src', 'https://www.youtube.com/embed/' + match[2] + '?autoplay=0');
+					return true;
+				}
+				else {
+					return false;
+					// Do anything for not being valid
+				}
+			}
+			else {
+				return false;
+			}
+	}
 }])
