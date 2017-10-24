@@ -13,7 +13,6 @@ function ($scope, DataService, UtilService, $state, $timeout) {
 					title: vm.item.title,
 					content: vm.item.content,
 					img: snapshot.downloadURL,
-					video: vm.item.video,
 					imageName: fileName,
 					num: 0
 				}).then(function (result) {
@@ -53,33 +52,11 @@ function ($scope, DataService, UtilService, $state, $timeout) {
 		} else if (!vm.item.title) {
 			alert("Hãy thêm tiêu đề để thêm mới tiết mục");
 			return false;
-		} else if (!vm.item.video) {
-			alert("Hãy thêm link video để thêm mới tiết mục");
-			return false;
-		} else if (!validateYouTubeUrl(vm.item.video)) {
-			alert("Link video không đúng. Hãy nhập link video youtube để thêm mới tiết mục");
-			return false;
 		} else if (!vm.item.content) {
 			alert("Hãy thêm nội dung để thêm mới tiết mục");
 			return false;
 		} else {
 			return true;
-		}
-	}
-
-	function validateYouTubeUrl( linkVideo) {
-		var url = linkVideo;
-		if (url != undefined || url != '') {
-			var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
-			var match = url.match(regExp);
-			if (match && match[2].length == 11) {
-				$('#ytplayerSide').attr('src', 'https://www.youtube.com/embed/' + match[2] + '?autoplay=0');
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
 		}
 	}
 }])

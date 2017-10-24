@@ -9,11 +9,11 @@ app.run(['$rootScope', '$transitions', '$state', function ($rootScope, $transiti
 
 	// config firebase
 	firebase.initializeApp({
-	    apiKey: "AIzaSyACymEczraf7UWLGZuLaOFfV2Pc_UVKzJk",
-	    authDomain: "abbapp-aba85.firebaseapp.com",
-	    databaseURL: "https://abbapp-aba85.firebaseio.com",
-	    projectId: "abbapp-aba85",
-	    storageBucket: "abbapp-aba85.appspot.com",
-	    messagingSenderId: "685373680580"
+	    apiKey: "AIzaSyACZrquGOI4HS89PBC3GEd2VHQW6eMxYWA",
+	    authDomain: "abbapp-b24de.firebaseapp.com",
+	    databaseURL: "https://abbapp-b24de.firebaseio.com",
+	    projectId: "abbapp-b24de",
+	    storageBucket: "abbapp-b24de.appspot.com",
+	    messagingSenderId: "970186246171"
 	});
 }])

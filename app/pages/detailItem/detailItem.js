@@ -16,7 +16,6 @@ app.controller('DetailItemController', ['$scope', '$stateParams', 'DataService',
 			UtilService.showLoading();
 			var storageRef = firebase.storage().ref();
 			var fileName = vm.item.imageName;
-			console.log(fileName);
 			storageRef.child(fileName).putString(imageBlob, 'data_url').then(function (snapshot) {
 				DataService.update('items', vm.item).then(function (data) {
 					UtilService.hideLoading();

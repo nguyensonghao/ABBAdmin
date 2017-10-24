@@ -18,5 +18,19 @@ app.service('UtilService', ['$q', function ($q) {
 		return month + "/" + date.getFullYear();
     }
 
+    service.validateYouTubeUrl = function (linkVideo) {
+        var url = linkVideo;
+        if (url != undefined || url != '') {
+            var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+            var match = url.match(regExp);
+            if (match && match[2].length == 11) {
+                $('#ytplayerSide').attr('src', 'https://www.youtube.com/embed/' + match[2] + '?autoplay=0');
+                return true;
+            } 
+        }
+        
+        return false;
+    }
+
     return service;
 }])

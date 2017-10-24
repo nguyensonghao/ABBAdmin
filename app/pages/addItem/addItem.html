@@ -1,35 +1,3 @@
-<!-- <div class="add-item-container" ng-controller="AddItemController as vm">
-	<div ng-include="'/components/menu/menu.html'"></div>
-	<div class="col-md-8 col-md-offset-2">
-	<form  role="form" ng-submit="vm.add()">
-		<legend>Thêm tiết mục</legend>
-		
-		<div class="form-group">
-			<label for="file">Ảnh</label>
-			<input type="file" ng-model="vm.item.img" class="form-control" id="file" name="file" accept="image/*"onchange="angular.element(this).scope().readURL(this)">
-			<img id="image"/>
-		</div>
-
-		<div class="form-group">
-			<label for="title">Tiêu đề</label>
-			<input type="text" ng-model="vm.item.title" class="form-control" id="title" name="title" placeholder="Tiêu đề">
-		</div>
-
-		<div class="form-group">
-			<label for="video">Video</label>
-			<input type="text" ng-model="vm.item.video" class="form-control" id="video" name="video" placeholder="Video">
-		</div>
-
-		<div class="form-group">
-			<label for="content">Nội dung</label>
-			<textarea class="form-control" ng-model="vm.item.content" id="content" name="content" placeholder="Nội dung" rows="10"></textarea>
-		</div>
-	
-		<button type="submit" class="btn btn-primary">Thêm</button>
-	</form>
-	</div>
-</div> -->
-
 <div class="container body" ng-controller="AddItemController as vm">
 	<div class="main_container">
 		<div ng-include="'/components/menu/menu.html'"></div>
@@ -67,14 +35,6 @@
                         				<input type="text" class="form-control col-md-7 col-xs-12" ng-model="vm.item.title" id="title" name="title" placeholder="Tiêu đề">
                         			</div>
                       			</div>
-                      			<div class="form-group col-md-8">
-                        			<label class="control-label" for="first-name">
-                        				Video <span class="required">*</span>
-                        			</label>
-                        			<div class="">
-                        				<input type="text" class="form-control col-md-7 col-xs-12" ng-model="vm.item.video" id="video" name="video" placeholder="Video">
-                        			</div>
-                      			</div>      
                       			<div class="form-group col-md-8">
                         			<label class="control-label" for="first-name">
                         				Nội dung <span class="required">*</span>

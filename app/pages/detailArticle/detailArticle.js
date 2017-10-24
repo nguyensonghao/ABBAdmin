@@ -29,7 +29,10 @@ app.controller('DetailArticleController', ['$scope', '$stateParams', 'DataServic
 		} else {
 			DataService.update('articles', vm.article).then(function (data) {
 				alert("Sửa bài đăng thành công");
-			})
+			}).catch(function (e) {
+				UtilService.hideLoading();
+				console.log(e);
+			});
 		}
 	}
 
