@@ -18,6 +18,7 @@ app.controller('DetailArticleController', ['$scope', '$stateParams', 'DataServic
 			var storageRef = firebase.storage().ref();
 			var fileName = vm.article.imageName;
 			storageRef.child(fileName).putString(imageBlob, 'data_url').then(function (snapshot) {
+				vm.article.img = snapshot.downloadURL;
 				DataService.update('articles', vm.article).then(function (data) {
 					UtilService.hideLoading();
 					alert("Sửa bài đăng thành công");
