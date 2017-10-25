@@ -36,6 +36,12 @@ function ($scope, DataService, UtilService, $state, $timeout) {
 
 	$scope.readURL = function (input) {
         if (input.files && input.files[0]) {
+			var typeFile = input.files[0].type.split('/')[0];
+			if(typeFile != 'image'){
+				vm.article.imageBlob = '';
+				alert("File không hợp lệ");
+				return;
+			}
             var reader = new FileReader();
 		   	reader.readAsDataURL(input.files[0]);
 		   	reader.onload = function () {

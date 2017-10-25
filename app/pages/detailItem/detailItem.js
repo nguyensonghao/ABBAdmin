@@ -12,28 +12,38 @@ app.controller('DetailItemController', ['$scope', '$stateParams', 'DataService',
 	}
 
 	vm.update = function () {
-		if (imageBlob) {
-			UtilService.showLoading();
-			var storageRef = firebase.storage().ref();
-			var fileName = vm.item.imageName;
-			storageRef.child(fileName).putString(imageBlob, 'data_url').then(function (snapshot) {
-				DataService.update('items', vm.item).then(function (data) {
+		if( validate()){
+			if (imageBlob) {
+				UtilService.showLoading();
+				var storageRef = firebase.storage().ref();
+				var fileName = vm.item.imageName;
+				storageRef.child(fileName).putString(imageBlob, 'data_url').then(function (snapshot) {
+					DataService.update('items', vm.item).then(function (data) {
+						UtilService.hideLoading();
+						alert("Sửa tiết mục thành công");
+					})
+				}).catch(function (e) {
 					UtilService.hideLoading();
+					console.log(e);
+				});
+			} else {
+				DataService.update('items', vm.item).then(function (data) {
 					alert("Sửa tiết mục thành công");
 				})
-			}).catch(function (e) {
-				UtilService.hideLoading();
-				console.log(e);
-			});
-		} else {
-			DataService.update('items', vm.item).then(function (data) {
-				alert("Sửa tiết mục thành công");
-			})
+			}
 		}
+		
 	}
 
 	$scope.readURL = function (input) {
 		if (input.files && input.files[0]) {
+			var typeFile = input.files[0].type.split('/')[0];
+			if(typeFile != 'image'){
+				vm.article.img = '';
+				imageBlob = '';
+				alert("File không hợp lệ");
+				return;
+			}
             var reader = new FileReader();
 		   	reader.readAsDataURL(input.files[0]);
 		   	reader.onload = function () {
@@ -41,6 +51,21 @@ app.controller('DetailItemController', ['$scope', '$stateParams', 'DataService',
 		     	imageBlob = reader.result;
 		   	};
         }
+	}
+
+	function validate () {
+		if (!imageBlob && vm.item.img) {
+			alert("Hãy chọn ảnh để thêm mới tiết mục");
+			return false;
+		} else if (!vm.item.title) {
+			alert("Hãy thêm tiêu đề để thêm mới tiết mục");
+			return false;
+		} else if (!vm.item.content) {
+			alert("Hãy thêm nội dung để thêm mới tiết mục");
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	loadData();
