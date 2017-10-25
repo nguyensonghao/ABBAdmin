@@ -13,32 +13,42 @@ app.controller('DetailArticleController', ['$scope', '$stateParams', 'DataServic
 	}
 
 	vm.update = function () {
-		if (imageBlob) {
-			UtilService.showLoading();
-			var storageRef = firebase.storage().ref();
-			var fileName = vm.article.imageName;
-			storageRef.child(fileName).putString(imageBlob, 'data_url').then(function (snapshot) {
-				vm.article.img = snapshot.downloadURL;
-				DataService.update('articles', vm.article).then(function (data) {
+		if(validate()){
+			if (imageBlob) {
+				UtilService.showLoading();
+				var storageRef = firebase.storage().ref();
+				var fileName = vm.article.imageName;
+				storageRef.child(fileName).putString(imageBlob, 'data_url').then(function (snapshot) {
+					vm.article.img = snapshot.downloadURL;
+					DataService.update('articles', vm.article).then(function (data) {
+						UtilService.hideLoading();
+						alert("Sửa bài đăng thành công");
+					})
+				}).catch(function (e) {
 					UtilService.hideLoading();
+					console.log(e);
+				});
+			} else {
+				DataService.update('articles', vm.article).then(function (data) {
 					alert("Sửa bài đăng thành công");
-				})
-			}).catch(function (e) {
-				UtilService.hideLoading();
-				console.log(e);
-			});
-		} else {
-			DataService.update('articles', vm.article).then(function (data) {
-				alert("Sửa bài đăng thành công");
-			}).catch(function (e) {
-				UtilService.hideLoading();
-				console.log(e);
-			});
+				}).catch(function (e) {
+					UtilService.hideLoading();
+					console.log(e);
+				});
+			}
 		}
+		
 	}
 
 	$scope.readURL = function (input) {
 		if (input.files && input.files[0]) {
+			var typeFile = input.files[0].type.split('/')[0];
+			if(typeFile != 'image'){
+				vm.article.img = '';
+				imageBlob ='';
+				alert("File không hợp lệ");
+				return;
+			}
             var reader = new FileReader();
 		   	reader.readAsDataURL(input.files[0]);
 		   	reader.onload = function () {
@@ -46,6 +56,26 @@ app.controller('DetailArticleController', ['$scope', '$stateParams', 'DataServic
 		     	imageBlob = reader.result;
 		   	};
         }
+	}
+
+	function validate () {
+		if (!vm.article.title) {
+			alert("Hãy thêm tiêu đề để thêm mới tin tức");
+			return false;
+		} else if (!vm.article.content) {
+			alert("Hãy thêm nội dung để thêm mới tin tức");
+			return false;
+		} else if (!imageBlob && !vm.article.video && !vm.article.img ) {
+			alert("Hãy thêm ảnh hoặc video");
+			return false;
+		} else if (vm.article.video) {
+			if (!UtilService.validateYouTubeUrl(vm.article.video)) {
+				alert("Link video không hợp lệ");
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	loadData();
