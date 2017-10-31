@@ -18,7 +18,7 @@ function ($scope, UtilService, DataService, $state, $timeout, UtilService) {
 						img: snapshot.downloadURL,
 						time: new Date().getTime(),
 						imageName: fileName,
-						video: vm.article.video
+						video: vm.article.video ? vm.article.video : ""
 					}).then(function (result) {
 						UtilService.hideLoading();
 						$timeout(function () {
@@ -41,7 +41,7 @@ function ($scope, UtilService, DataService, $state, $timeout, UtilService) {
 					content: vm.article.content,
 					time: new Date().getTime(),
 					imageName: fileName,
-					video: vm.article.video
+					video: vm.article.video ? vm.article.video : ""
 				}).then(function (result) {
 					UtilService.hideLoading();
 					$timeout(function () {

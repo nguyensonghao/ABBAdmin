@@ -12,7 +12,7 @@
 	            <div class="col-md-12 col-sm-12 col-xs-12">
 	                <div class="x_panel">
 	                  	<div class="x_title">
-	                    	<h2>Bảng</h2>
+	                    	<h2>Tổng lượt bình chọn: {{vm.sumVote()}}</h2>
 	                    	<div class="clearfix"></div>
 	                  	</div>
 
@@ -34,7 +34,7 @@
 										<td class="center">{{$index + 1}}</td>
 										<td>{{item.title}}</td>
 										<td class="center"><img height="60px" src="{{vm.getImageNotCache(item.img)}}"></td>
-										<td class="center">{{item.num}} bình chọn</td>
+										<td class="center">{{item.num}} bình chọn ({{item.percent}})</td>
 										<td class="center">
 											<div class="btn-group">
 												<button type="button" class="btn btn-primary" ui-sref="detail-item({id: item.id})">
